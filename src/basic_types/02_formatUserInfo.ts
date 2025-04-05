@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Task:
 // Write a TypeScript function formatUserInfo that accepts an object with user information
 // and returns a string with the formatted information.
@@ -20,7 +19,20 @@
 // Add login status information: " (online)" if isLoggedIn is true, and " (offline)" if isLoggedIn is false.
 // If lastLogin is specified and not null, add ", last login: [value]".
 
-function formatUserInfo() {}
+type User = {
+	name: string;
+	age?: number;
+	isLoggedIn: boolean;
+	lastLogin?: string | null;
+};
+
+function formatUserInfo(user: User) {
+	let result: string = `${user.name}`;
+	if (user.age) result += ` (age: ${user.age})`;
+	result += user.isLoggedIn ? " (online)" : " (offline)";
+	if (user.lastLogin) result += `, last login: ${user.lastLogin}`;
+	return result;
+}
 
 function testFormatUserInfo() {
 	// Test 1: User with name, age, and online status
