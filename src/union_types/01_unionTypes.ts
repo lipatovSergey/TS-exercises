@@ -29,6 +29,30 @@
 type DataInput = string | number | number[];
 
 // TODO: Реализуйте функцию analyzeData
+function analyzeData(data: DataInput): string {
+	// Используйте typeof для проверки на строку и число
+	if (typeof data === "string") {
+		// Здесь TypeScript знает, что data - это string
+		return `Получена строка. Длина: ${data.length}.`;
+	} else if (typeof data === "number") {
+		// Здесь TypeScript знает, что data - это number
+		return `Получено число. Квадрат числа: ${data * data}.`;
+	} else if (Array.isArray(data)) {
+		// Здесь TypeScript знает, что data - это number[]
+		let sum = 0;
+		for (const num of data) {
+			sum += num;
+		}
+		// Альтернатива для суммы: const sum = data.reduce((acc, val) => acc + val, 0);
+		return `Получен массив чисел. Сумма элементов: ${sum}.`;
+	} else {
+		// Эта ветка не должна быть достижима с заданным Union Type,
+		// но полезна для полноты и отладки.
+		// Можно использовать `never` для проверки полноты:
+		// const _exhaustiveCheck: never = data;
+		return "Неизвестный тип данных.";
+	}
+}
 
 // --- Тесты для проверки ---
 function testAnalyzeData() {

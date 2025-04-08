@@ -49,6 +49,29 @@ type AppEvent = LoginEvent | MessageEvent | LogoutEvent;
 //   для определения конкретного типа события внутри функции.
 
 // TODO: Реализуйте функцию processEvent
+function processEvent(event: AppEvent): string {
+	// Ваш код здесь
+	// Используйте event.type для определения типа события
+	// и доступа к соответствующим полям.
+	switch (event.type) {
+		case "LOGIN":
+			// TypeScript теперь знает, что event здесь - это LoginEvent
+			return `Пользователь ${
+				event.userId
+			} вошел в систему в ${event.timestamp.toISOString()}`;
+		case "MESSAGE":
+			// TypeScript теперь знает, что event здесь - это MessageEvent
+			return `Пользователь ${event.userId} отправил сообщение: '${event.message}'`;
+		case "LOGOUT":
+			// TypeScript теперь знает, что event здесь - это LogoutEvent
+			return `Пользователь ${event.userId} вышел из системы`;
+		default:
+			// Обработка случая, если тип не совпадает (хотя с union type это маловероятно)
+			// Можно использовать `never` для проверки полноты switch
+			const exhaustiveCheck: never = event;
+			return `Неизвестный тип события: ${exhaustiveCheck}`;
+	}
+}
 
 // --- Тесты для проверки ---
 function testProcessEvent() {
