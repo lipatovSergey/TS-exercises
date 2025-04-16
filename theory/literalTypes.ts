@@ -10,3 +10,5 @@ const obj = { counter: 0 };
 if (constString) {
   obj.counter = 1;
 }
+
+const req = { method: "Get" } as const
